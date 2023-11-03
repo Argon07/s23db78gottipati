@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  h1 Hats Class
+  .container-fluid
+    .row
+      - let results = [{ hatStyle: 'Fedora', size: 'Medium', color: 'Black', price: 29.99 },{ hatStyle: 'Beanie', size: 'One Size', color: 'Gray', price: 14.99 },{ hatStyle: 'Sun Hat', size: 'Large', color: 'Beige', price: 19.99 }]
+      each hat, index in results
+        .col-sm-4(style="cursor: pointer",onclick=`buy(${index})`) 
+          h4= hat.hatStyle
+          p Style: #{hat.hatStyle}
+          p Size: #{hat.size}
+          p Color: #{hat.color}
+          p Price: $#{hat.price.toFixed(2)}
+    a(href="/") Back to Index
+
+  script.
+    function buy(index) {
+      alert(`You purchased item ${index}`);
+    }
