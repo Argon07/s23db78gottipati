@@ -4,7 +4,7 @@ block content
   h1 Hats Class
   .container-fluid
     .row
-      - let results = [{ hatStyle: 'Fedora', size: 'Medium', color: 'Black', price: 29.99 },{ hatStyle: 'Beanie', size: 'One Size', color: 'Gray', price: 14.99 },{ hatStyle: 'Sun Hat', size: 'Large', color: 'Beige', price: 19.99 }]
+      - let results1 = [{ hatStyle: 'Fedora', size: 'Medium', color: 'Black', price: 29.99 },{ hatStyle: 'Beanie', size: 'One Size', color: 'Gray', price: 14.99 },{ hatStyle: 'Sun Hat', size: 'Large', color: 'Beige', price: 19.99 }]
       each hat, index in results
         .col-sm-4(style="cursor: pointer",onclick=`buy(${index})`) 
           h4= hat.hatStyle
