@@ -85,4 +85,16 @@ exports.hat_view_all_Page = async function(req, res) {
     res.status(500);
     res.send(`{"error": ${err}}`);
     } 
-   }
+   };
+
+   exports.hat_view_one_Page = async function (req, res) {
+    console.log("single view for id " + req.query.id)
+    try {
+        result = await hat.findById(req.query.id)
+        res.render('hatdetail', { title: 'Hat Detail', toShow: result });
+    }
+    catch (err) {
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+};
