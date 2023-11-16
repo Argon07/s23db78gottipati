@@ -1,0 +1,35 @@
+extends layout
+
+block content
+  h1= title
+  form(id='HatForm', action="/resource/hat", method="POST")
+    div.form-group
+      label.hatAttr(for='hatStyle') Hat Style
+      input#hatStyle(type='text', name='hatStyle')
+    div.form-group
+      label.hatAttr(for='color') Hat Color
+      input#color(type='text', name='color')
+    div.form-group
+      label.hatAttr(for='size') Hat Size
+      input#size(type='text', name='size')
+    div.form-group
+      label.hatAttr(for='price') Hat Price
+      input#price(type='number', name='price')
+    input(type="submit")
+  script.
+    document.forms['HatForm'].addEventListener('submit', (event) => {
+      event.preventDefault();
+      // TODO do something here to show the user that the form is being submitted
+      fetch(event.target.action, {
+        method: 'POST',
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+      }).then((resp) => {
+        return resp.json(); // or resp.text() or whatever the server sends
+      }).then((body) => {
+        alert("Save succeeded");
+        // TODO handle body
+      }).catch((error) => {
+        // TODO handle error
+        alert("Save failed " + error);
+      });
+    });
