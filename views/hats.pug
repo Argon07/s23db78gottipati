@@ -2,16 +2,21 @@ extends layout
 
 block content
   h1 Hats Class
+  head
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm', crossorigin='anonymous')
+    
   .container-fluid
     .row
       - let results1 = [{ hatStyle: 'Fedora', size: 'Medium', color: 'Black', price: 29.99 },{ hatStyle: 'Beanie', size: 'One Size', color: 'Gray', price: 14.99 },{ hatStyle: 'Sun Hat', size: 'Large', color: 'Beige', price: 19.99 }]
       each hat, index in results
-        .col-sm-4(style="cursor: pointer",onclick=`buy(${index})`) 
-          h4= hat.hatStyle
-          p Style: #{hat.hatStyle}
-          p Size: #{hat.size}
-          p Color: #{hat.color}
-          p Price: $#{hat.price.toFixed(2)}
+        .col-sm-4(style="cursor: pointer", onclick=`buy(${index})`)
+          .card.clickable-card(style=`background-color: ${hat.color}; color: white;`)
+            .card-body
+              h4.card-title= hat.hatStyle
+              p.card-text Style: #{hat.hatStyle}
+              p.card-text Size: #{hat.size}
+              p.card-text Color: #{hat.color}
+              p.card-text Price: $#{hat.price.toFixed(2)}
     a(href="/") Back to Index
 
   script.

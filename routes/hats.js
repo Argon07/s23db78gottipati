@@ -5,4 +5,7 @@ var router = express.Router();
 router.get('/', hat_controlers.hat_view_all_Page );
 router.get('/detail', hat_controlers.hat_view_one_Page);
 router.get('/create', hat_controlers.hat_create_Page);
+router.get('/update', hat_controlers.hat_update_Page);
+router.get('/delete', hat_controlers.hat_delete_Page);
+
 module.exports = router

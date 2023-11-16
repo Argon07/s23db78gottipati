@@ -1,0 +1,50 @@
+extends layout
+block content
+  h1= title
+  if (toShow == null)
+    h2 No instance to delete
+  else
+    - let hatId = toShow._id
+    - let hatStyle = toShow.hatStyle
+    - let color = toShow.color
+    - let size = toShow.size
+    - let actionId = "/resource/hat/" + hatId
+    script.
+      let actionId = "#{actionId}"
+    div
+      div.row
+        div(class='hatAttr mr-3') Hat ID is:
+          div #{hatId}
+      div.row
+        div(class='hatAttr mr-3') Hat Style is:
+          div #{hatStyle}
+      div.row
+        div(class='hatAttr mr-3') Hat Color is:
+          div #{color}
+      div.row
+        div(class='hatAttr mr-3') Hat Size is:
+          div #{size}
+      button(class="btn btn-danger m-2" onclick="deleteOnId()") Delete
+      button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+    script.
+      function cancel() {
+        // Go back to the home page for the hat collection
+        window.location.href='/hats'
+      }
+    script.
+      function deleteOnId() {
+        console.log("starting delete")
+        // delete first
+        fetch(actionId, {
+          method: 'DELETE' // Don't need a body for the delete
+        }).then((resp) => {
+          return resp.json(); // or resp.text() or whatever the server sends
+        }).then((body) => {
+          alert("Delete succeeded")
+          window.location.href='/hats'
+          // TODO handle body
+        }).catch((error) => {
+          // TODO handle error
+          alert("Delete failed " + error)
+        });
+      }
