@@ -1,19 +1,12 @@
 extends layout
 
 block content
-  h1 Simba
-  p Hakuna Matata
-  button(type="button", class="btn btn-secondary", onclick="goFaster()" ) Press Me
-  div#faster Increase the speed
- 
- 
-  script.
-    var mph = 20;
-    var change = 1;
-    
-    function goFaster() {
-        mph += change;
-        change++;
-        document.getElementById("faster").textContent = `MPH ${mph} with change ${change}`;
-    }
-  a(href="/hats") Way to Hats 
+  if (!user)
+    a(href="/login") Login
+    br
+    a(href="/register") Register
+  if (user)
+    p You are currently logged in as #{user.username}
+    a(href="/hats") Try some Hats
+    br
+    a(href="/logout") Logout

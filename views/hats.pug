@@ -1,25 +1,53 @@
 extends layout
 
 block content
-  h1 Hats Class
+  h1= title
   head
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm', crossorigin='anonymous')
     
-  .container-fluid
-    .row
-      - let results1 = [{ hatStyle: 'Fedora', size: 'Medium', color: 'Black', price: 29.99 },{ hatStyle: 'Beanie', size: 'One Size', color: 'Gray', price: 14.99 },{ hatStyle: 'Sun Hat', size: 'Large', color: 'Beige', price: 19.99 }]
-      each hat, index in results
-        .col-sm-4(style="cursor: pointer", onclick=`buy(${index})`)
-          .card.clickable-card(style=`background-color: ${hat.color}; color: white;`)
-            .card-body
-              h4.card-title= hat.hatStyle
-              p.card-text Style: #{hat.hatStyle}
-              p.card-text Size: #{hat.size}
-              p.card-text Color: #{hat.color}
-              p.card-text Price: $#{hat.price.toFixed(2)}
+  - let hats = results
+  div(class="container-fluid align-items-center")
+    .col-sm-12.mb-3 To create new Hat :
+        button.btn.btn-primary(ml-1, onclick=`dispatch("${createPath}")`) Create
+    // Display hats with an Update button
+    div(class="row m-1")
+      each hat, index in hats
+        - let updatePath = `/hats/update?id=${hat._id}`
+        - let detailPath = `/hats/detail?id=${hat._id}`
+        - let deletePath = `/hats/delete?id=${hat._id}`
+        - let createPath = `/hats/create`
+        .card.clickable-card.text-center( style=`background-color: ${hat.color}; color: Black;`)
+          | Item #{hat.hatStyle}(#{hat.size}) is #{hat.color} #{hat.price.toFixed(2)}$
+          div.button-container.mx-auto
+            button.btn.btn-primary(ml-1, onclick=`dispatch("${updatePath}")`) Update
+            button.btn.btn-primary(ml-1, onclick=`dispatch("${detailPath}")`) Detail 
+            button.btn.btn-primary(ml-1, onclick=`dispatch("${deletePath}")`) Delete       
+
+    // Additional details with a purchase feature
+    div.container-fluid
+      div.row
+        each hat, index in hats
+          div.col-sm-2.card.clickable-card(onclick=`buy(${index})`, style=`background-color: ${hat.color}; color: Black;`)
+            | #{hat.hatStyle}
+          div.col-sm-2.card.clickable-card(onclick=`buy(${index})`, style=`background-color: ${hat.color}; color: Blacl;`)
+            | #{hat.size}
+          div.col-sm-2.card.clickable-card(onclick=`buy(${index})`, style=`background-color: ${hat.color}; color: Black;`)
+            | #{hat.color}
+          div.col-sm-2.card.clickable-card(onclick=`buy(${index})`, style=`background-color: ${hat.color}; color: Black;`)
+            | #{hat.price.toFixed(2)}
+          br
+          hr
+
+    // Back to Index link
     a(href="/") Back to Index
 
   script.
+    // Keep the existing buy function
     function buy(index) {
-      alert(`You purchased item ${index}`);
+      alert(`You purchased Item ${index + 1}`);
+    }
+
+    // Keep the existing dispatch function
+    function dispatch(path) {
+      window.location.href = path;
     }
