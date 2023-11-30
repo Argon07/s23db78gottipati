@@ -6,6 +6,7 @@ block content
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm', crossorigin='anonymous')
     
   - let hats = results
+  - let createPath = `/hats/create`
   div(class="container-fluid align-items-center")
     .col-sm-12.mb-3 To create new Hat :
         button.btn.btn-primary(ml-1, onclick=`dispatch("${createPath}")`) Create
@@ -15,7 +16,7 @@ block content
         - let updatePath = `/hats/update?id=${hat._id}`
         - let detailPath = `/hats/detail?id=${hat._id}`
         - let deletePath = `/hats/delete?id=${hat._id}`
-        - let createPath = `/hats/create`
+        
         .card.clickable-card.text-center( style=`background-color: ${hat.color}; color: Black;`)
           | Item #{hat.hatStyle}(#{hat.size}) is #{hat.color} #{hat.price.toFixed(2)}$
           div.button-container.mx-auto
