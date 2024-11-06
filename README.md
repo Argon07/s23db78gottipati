@@ -1,7 +1,7 @@
-Welcome to PUG # s23db78gottipati
+Welcome to PUG
 [Render](https://s23db78gottipati.onrender.com)
 <br>
-## Hats Class
+## Hats Project
 
 The "Hats" class represents different types of hats. It has the following attributes:
 
